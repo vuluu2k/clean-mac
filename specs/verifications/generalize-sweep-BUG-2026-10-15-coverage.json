@@ -1,0 +1,13 @@
+{
+  "defect_class": "end-only publication in user-selectable scan entrypoints",
+  "grep_pattern": "public func scan\\(",
+  "match_count": 2,
+  "sweep_scope": "Sources/CleanMacCore/{Scanner,DeepScanner}.swift",
+  "patched_in_pr": [
+    "Sources/CleanMacCore/Scanner.swift",
+    "Sources/CleanMacCore/DeepScanner.swift"
+  ],
+  "tracked_issues": [],
+  "remaining_matches": 0,
+  "note": "Both user-selectable modes publish immutable live previews. Internal ownership matching remains final-only inside the deep pipeline; it is not a selectable UI scan entrypoint. Folder aggregates never become cleanup capabilities."
+}

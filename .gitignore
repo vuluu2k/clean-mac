@@ -1,0 +1,13 @@
+.build/
+.swiftpm/
+dist/
+.DS_Store
+*.xcuserstate
+
+# Local verification output and credentials are not publication artifacts.
+specs/verifications/*.log
+.env
+.env.*
+!.env.example
+*.p12
+*.mobileprovision

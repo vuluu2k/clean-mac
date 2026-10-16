@@ -1,0 +1,28 @@
+bugs:
+  - bug_id: BUG-2026-10-15T141330
+    date: 2026-10-15
+    severity: medium
+    priority: P1
+    scope: deep-scan-coverage
+    summary: Live results remain empty and large folders made of small files are not reported
+    file: specs/bugs/BUG-2026-10-15T141330-scan-coverage.md
+    status: fixed
+    fixed_in: 0.2.1
+    risk_level: medium
+    approach: Bounded live previews, distinct coverage metrics, read-only folder aggregation and largest-file retention
+    files_changed:
+      - Sources/CleanMacCore/Models.swift
+      - Sources/CleanMacCore/Scanner.swift
+      - Sources/CleanMacCore/DeepScanner.swift
+      - Sources/CleanMacCore/FileTreeWalker.swift
+      - Sources/CleanMacCore/FolderUsageAccumulator.swift
+      - Sources/CleanMacCore/LargestFileResults.swift
+      - Sources/CleanMac/AppModel.swift
+      - Sources/CleanMac/Dashboard.swift
+      - Sources/CleanMac/DashboardComponents.swift
+      - Sources/CleanMac/DashboardAnalysis.swift
+      - Tests/CleanMacCoreTests/ScanCoverageTests.swift
+      - Tests/CleanMacCoreTests/AppModelTests.swift
+    evidence: specs/verifications/coverage-behavior.md
+    commit_message: 'fix: show live scan coverage and large folder totals'
+    committed: false
