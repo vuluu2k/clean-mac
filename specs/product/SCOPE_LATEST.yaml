@@ -1,0 +1,44 @@
+project: clean-mac
+version: 0.3.0
+platform: macOS 14+
+stack: Swift 6 / SwiftUI / Foundation / SwiftPM
+purpose: Reclaim disk space through explainable, user-confirmed cleanup without subscription fees.
+in_scope:
+  - Read-only scan of user caches and logs older than 14 days
+  - Read-only scan of Xcode DerivedData regular files older than 30 days
+  - Downloads installers older than 30 days and large files at least 100 MB
+  - Optional user-selected home subfolders for large-file review
+  - Explicit read-only startup-volume deep scan with permission warnings, cancellation and result limits
+  - Live bounded result previews and distinct inspection counts, logical-byte totals and read errors
+  - Deep file analysis from 10 MB; read-only folder aggregates from 100 MB including small files
+  - Bounded folder detail at eight levels and 50000 paths; largest 100 summaries without folder deletion
+  - App inventory from standard application roots, deep-walk app bundles and LaunchServices
+  - Exact bundle-ID suspected leftovers in user and system Library locations with per-file evidence
+  - Confirmed ordinary-file cleanup in narrowly owned user Caches, Logs, Preferences, Application Support and Saved Application State
+  - Read-only system, container, service and known database findings; optional Full Disk Access settings link
+  - Real disk capacity, category and recommendation filters, search, progress, cancellation, Finder reveal
+  - Separate explicit uninstall of verified third-party app bundles under /Applications and ~/Applications
+  - Exact-ID related-file review with no default selection, app-first Trash and per-file failure reporting
+  - Running, Apple, system and self-app protections; full bounded bundle metadata revalidation
+  - Bilingual Vietnamese and English UI with an in-app persistent language selector
+  - No default selection; explicit per-file selection and confirmation with full paths
+  - Native macOS Trash with per-file revalidation and partial failure reporting
+  - Temporary-fixture tests, runnable app bundle, MIT license
+  - Public GitHub source and bilingual static open-source landing page deployed with GitHub Pages
+  - Ad-hoc signed Universal macOS app in a verified DMG, with checksums and bilingual installation guidance on GitHub Releases
+out_of_scope:
+  - Permanent deletion or emptying Trash
+  - Cloud processing of app user data, telemetry, subscriptions, background agents, sudo
+  - Duplicate detection, APFS snapshots, system cleanup, force quit and vendor-specific service or driver uninstall
+  - Claims that age proves lack of use or that Trash frees space immediately
+  - Arbitrary whole-directory deletion or editing app databases
+  - Privilege escalation, SIP bypass, external-volume scans, fuzzy app-name ownership and guarantees of detecting every uninstalled app
+safety:
+  allowlist: Quick-scan roots plus exact owned user-Library leftover files with fresh app-absence checks
+  exclude_from_cleanup: Symlinks, hard links, packages, hidden entries, cloud placeholders, databases, containers, services, system and credential data; separate verified app-bundle uninstall is the only directory exception
+  app_uninstall: Complete bounded bundle snapshot, safe root, unchanged identity, not running; app moves before selected related regular files
+  deep_analysis: Read-only metadata including hidden files and packages; skip pseudo filesystems, external volumes, APFS duplicate paths, Trash and credential directories
+  app_identity: No default selection; Apple and installed-vendor-family protection; incomplete inventory locks leftover cleanup
+  confirmation: Explicit snapshot of selected files; revalidate identity, size, timestamps, path, and category before each operation
+  concurrency_limit: No scan or folder edits while cleanup is in progress
+verification: swift test && ./Scripts/build-app.sh

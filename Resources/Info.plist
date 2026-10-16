@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key><string>clean-mac</string>
+    <key>CFBundleDisplayName</key><string>clean-mac</string>
+    <key>CFBundleIdentifier</key><string>app.cleanmac.local</string>
+    <key>CFBundleExecutable</key><string>CleanMac</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleDevelopmentRegion</key><string>vi</string>
+    <key>CFBundleLocalizations</key><array><string>vi</string><string>en</string></array>
+    <key>CFBundleShortVersionString</key><string>0.3.0</string>
+    <key>CFBundleVersion</key><string>4</string>
+    <key>CFBundleIconFile</key><string>AppIcon</string>
+    <key>LSMinimumSystemVersion</key><string>14.0</string>
+    <key>NSHighResolutionCapable</key><true/>
+    <key>NSPrincipalClass</key><string>NSApplication</string>
+    <key>NSDownloadsFolderUsageDescription</key><string>clean-mac tìm bộ cài cũ và tệp lớn trong Downloads khi bạn bấm Quét.</string>
+    <key>NSDocumentsFolderUsageDescription</key><string>clean-mac đọc metadata trong Documents khi bạn chọn Quét sâu toàn ổ hoặc thêm thư mục này. Không tự xóa dữ liệu.</string>
+    <key>NSDesktopFolderUsageDescription</key><string>clean-mac đọc metadata trên Desktop khi bạn chọn Quét sâu toàn ổ hoặc thêm thư mục này. Không tự xóa dữ liệu.</string>
+</dict>
+</plist>

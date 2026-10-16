@@ -1,0 +1,3 @@
+"NSDownloadsFolderUsageDescription" = "clean-mac tìm bộ cài cũ và tệp lớn trong Downloads khi bạn bấm Quét.";
+"NSDocumentsFolderUsageDescription" = "clean-mac đọc metadata trong Documents khi bạn chọn Quét sâu toàn ổ hoặc thêm thư mục này. Không tự xóa dữ liệu.";
+"NSDesktopFolderUsageDescription" = "clean-mac đọc metadata trên Desktop khi bạn chọn Quét sâu toàn ổ hoặc thêm thư mục này. Không tự xóa dữ liệu.";

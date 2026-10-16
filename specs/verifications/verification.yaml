@@ -1,0 +1,76 @@
+type: verification-report
+context: clean-mac 0.3.0 app uninstall, recommendation filters and persistent Vietnamese-English switch
+branch: feat/native-cleaner
+mechanical_status: passed
+terminal_verdict:
+  command: 'swift test && swift Scripts/check-localization.swift && CLEAN_MAC_APP_PATH="$PWD/dist/preview/clean-mac.app" ./Scripts/build-app.sh'
+  exit_code: 0
+  evidence: specs/verifications/bilingual-preflight.log
+  tests_passed: 49
+  localization_keys_checked: 211
+  english_coverage: complete-for-compiler-extracted-keys
+  placeholders: matched
+  privacy_descriptions: 3-paired
+  external_dependencies: 0
+  swift_typechecking: passed-in-debug-and-release
+  compiler_warnings: none
+  shell_syntax: passed-for-build-and-run-scripts
+  readme_style: 0-errors-2-nonblocking-warnings
+bundle:
+  path: dist/preview/clean-mac.app
+  version: 0.3.0
+  build: 4
+  release_build: passed
+  plist_validation: passed
+  codesign_verification: passed
+  signing: ad-hoc
+  packaged_localizations: passed-in-core-and-main-resources
+  original_bundle_preserved: dist/clean-mac.app
+smoke:
+  actual_release_idle_launch: passed
+  actual_release_screenshot: .build/bilingual-smoke/release-idle.png
+  idle_inspection: Visible language selector, initial Quick mode, no automatic scan, zero selection, disabled cleanup.
+  release_window_left_open: true
+  fixture_app_catalog_and_review: passed
+  fixture_confirmation_in_both_languages: passed
+  fixture_language_switch_both_directions: passed-without-resetting-results-selection-or-filter
+  fixture_language_persistence: passed-in-separate-bundle-domain
+  fixture_language_change_during_confirmation: blocked-token-unchanged
+  packaged_resource_path_assertion: passed
+  behavior: specs/verifications/bilingual-behavior.md
+  earlier_uninstall_behavior: specs/verifications/uninstaller-behavior.md
+  agent_started_real_data_scan: false
+  agent_stopped_user_app_or_scan: false
+  permission_changes: false
+  native_trash_operations: false
+fixture_checks:
+  - Existing Quick and Deep rules, previews, folder summaries and cancellation remain covered
+  - Protected system, Apple, self, running and out-of-scope apps cannot gain removal through forged plans
+  - Full bundle metadata revalidation detects changed descendants and respects limits
+  - Bundle symlinks are recorded without following external targets
+  - App moves first; app failure prevents data operations; later file failures are independent
+  - Exact related ownership, vendor families, other copies and fresh registration checks
+  - Databases, containers, shared data, system data and arbitrary directories remain locked
+  - Recommendation filters intersect category and search without granting capabilities
+  - Empty initial selection, immutable confirmation and stale-token guards
+  - Deferred messages, interpolation values and warning identities remain stable across language rendering
+  - Preference tests use an isolated defaults suite; fixture tests inject both cleanup and app Trash
+manual_uat:
+  status: fixture-and-idle-smoke-passed-real-data-validation-pending
+  not_verified:
+    - Native uninstall and Finder Put Back with an approved disposable app
+    - Real-volume completion time and full-access coverage
+    - Full Disk Access, SIP, Unix permission and third-party provider behavior
+    - Vendor helper, service, driver or extension uninstall behavior
+    - Light appearance, VoiceOver, macOS 14 and Intel hardware
+review:
+  kind: source-self-review
+  report: specs/security/REVIEW.md
+  independent_review: not-requested
+  runtime_api_audit: three-native-Trash-defaults-no-network-subprocess-or-permanent-delete-sites-in-Sources
+  known_limits: Path-based revalidation is not atomic; exact ownership matching is incomplete; OS text can follow system language.
+release:
+  committed: false
+  remote_created: false
+  pushed: false
+  notarized: false

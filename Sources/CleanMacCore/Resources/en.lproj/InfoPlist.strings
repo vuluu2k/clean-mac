@@ -1,0 +1,3 @@
+"NSDownloadsFolderUsageDescription" = "clean-mac looks for old installers and large files in Downloads only when you start a scan.";
+"NSDocumentsFolderUsageDescription" = "clean-mac reads file metadata in Documents when you choose a deep scan or add this folder. Nothing is removed automatically.";
+"NSDesktopFolderUsageDescription" = "clean-mac reads file metadata on Desktop when you choose a deep scan or add this folder. Nothing is removed automatically.";

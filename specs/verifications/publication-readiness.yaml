@@ -1,0 +1,47 @@
+type: publication-readiness
+context: Initial public clean-mac 0.3.0 source, website and downloadable DMG
+repository: https://github.com/vuluu2k/clean-mac
+website: https://vuluu2k.github.io/clean-mac/
+release: https://github.com/vuluu2k/clean-mac/releases/tag/v0.3.0
+snapshot: Local checks before the initial public push; hosted runs and live URLs are verified separately after publication.
+local_checks:
+  swift_tests: 49-passed
+  localization_keys: 211-covered
+  website_tests: 6-passed
+  browser: isolated-Chrome-desktop-tablet-mobile-both-languages
+  browser_widths: [320, 390, 768, 1440]
+  browser_errors: 0
+  missing_local_resources: 0
+  interaction_checks:
+    - Language switching, persistence and disabled storage
+    - Clipboard success and failure with stubbed clipboard
+    - Native FAQ, keyboard skip link, named links/buttons and reduced motion
+    - Project-site prefix paths and no horizontal overflow
+  workflow: YAML-and-permissions-validated-commands-run-locally
+  local_act_emulation: unavailable-not-installed
+package:
+  filename: clean-mac-0.3.0-universal.dmg
+  bytes: 1521889
+  sha256: bb5e3d77310e7c9d2b0c1abc857314aae1dc30bb1ffed72021fa8410979fffbb
+  architectures: [arm64, x86_64]
+  minos_both_architectures: '14.0'
+  app_signature: ad-hoc-verified-strict-deep
+  image_integrity: passed
+  read_only_mount: app-version-architecture-signature-install-guide-Applications-link-verified
+  checksum_file: SHA256SUMS
+  developer_id_signed: false
+  notarized: false
+publication_review:
+  known_credential_patterns: none-found
+  personal_machine_path_references: none-in-source-candidates
+  large_generated_files: none-in-source-candidates
+  generated_bundles_logs_profiles: ignored
+  artwork: original-SVG-and-illustrative-data-not-private-screenshots
+  workflow_actions: first-party-full-SHA-pins
+  deployment: main-only-after-verification-with-job-scoped-Pages-permissions
+  no_app_data_scan_or_native_trash: true
+limits:
+  - Intel hardware and downloaded/quarantined installation still require manual verification
+  - Ad-hoc app can be blocked by Gatekeeper; no automatic security bypass
+  - Native real-data cleanup and uninstall remain unverified
+  - Browser smoke is not full VoiceOver or Safari testing
