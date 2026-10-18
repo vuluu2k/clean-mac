@@ -22,6 +22,10 @@ struct CleanMacApp: App {
             .defaultSize(width: 1220, height: 850)
             .windowStyle(.hiddenTitleBar)
             .commands {
+                CommandGroup(after: .appInfo) {
+                    Button(L10n.text("Kiểm tra cập nhật…")) { model.showUpdates = true }
+                        .disabled(model.hasOpenReview)
+                }
                 CommandGroup(replacing: .newItem) {
                     Button(L10n.text("Quét thông minh"), action: model.scan)
                         .keyboardShortcut("r").disabled(model.busy || model.hasOpenReview)

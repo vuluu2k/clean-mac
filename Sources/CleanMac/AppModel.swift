@@ -50,6 +50,8 @@ final class AppModel: ObservableObject {
     @Published var inspectedItem: ScanItem?
     @Published var alertMessage: String?
     @Published var showIssues = false
+    @Published var showUpdates = false
+    let updates: AppUpdates
     private var worker: Task<Void, Never>?
     private var activeScanID: UUID?
     let home: URL
@@ -58,13 +60,18 @@ final class AppModel: ObservableObject {
     private let isApplicationRunning: @Sendable (InstalledApplication) -> Bool
     private let registeredApplicationURL: @Sendable (String) -> URL?
     private let trashOperation: @Sendable (URL) throws -> Void
+    private let diskSpaceReader: @Sendable (URL) throws -> DiskSpace
 
     init(home: URL = FileManager.default.homeDirectoryForCurrentUser,
          systemRoot: URL = URL(fileURLWithPath: "/"),
+         updates: AppUpdates? = nil,
+         diskSpaceReader: @escaping @Sendable (URL) throws -> DiskSpace = DiskSpace.read,
          isRegistered: @escaping @Sendable (String) -> Bool = ApplicationInventory.isRegistered,
          isApplicationRunning: @escaping @Sendable (InstalledApplication) -> Bool = ApplicationUninstaller.running,
          registeredApplicationURL: @escaping @Sendable (String) -> URL? = ApplicationUninstaller.registration,
          trashOperation: @escaping @Sendable (URL) throws -> Void = { try FileManager().trashItem(at: $0, resultingItemURL: nil) }) {
+        self.diskSpaceReader = diskSpaceReader
+        self.updates = updates ?? AppUpdates()
         self.home = home.resolvingSymlinksInPath().standardizedFileURL
         self.systemRoot = systemRoot.standardizedFileURL
         self.isRegistered = isRegistered
@@ -74,7 +81,7 @@ final class AppModel: ObservableObject {
     }
 
     var busy: Bool { phase != .idle }
-    var hasOpenReview: Bool { confirmation != nil || applicationPlan != nil || applicationConfirmation != nil }
+    var hasOpenReview: Bool { confirmation != nil || applicationPlan != nil || applicationConfirmation != nil || showUpdates }
     var applicationUninstaller: ApplicationUninstaller {
         ApplicationUninstaller(policy: policy, systemRoot: systemRoot, isRunning: isApplicationRunning, registeredURL: registeredApplicationURL)
     }
@@ -101,7 +108,8 @@ final class AppModel: ObservableObject {
 
     func refreshDisk() async {
         let home = policy.home
-        let result = await Task.detached(priority: .utility) { Result { try DiskSpace.read(at: home) } }.value
+        let read = diskSpaceReader
+        let result = await Task.detached(priority: .utility) { Result { try read(home) } }.value
         switch result {
         case .success(let space): disk = space; diskError = nil
         case .failure(let error): disk = nil; diskError = error.localizedDescription

@@ -6,6 +6,7 @@
 
 A free, open-source macOS app built with SwiftUI. It explains cleanup suggestions and lets you decide what to remove.
 No server, accounts, telemetry, cloud AI or external dependencies.
+Optional update check (off by default) reads public release metadata from GitHub; no scan data is sent.
 
 ## Download
 

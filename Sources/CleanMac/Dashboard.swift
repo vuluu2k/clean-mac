@@ -39,11 +39,13 @@ struct Dashboard: View {
         }
         .frame(minWidth: 1080, minHeight: 740)
         .task { await model.refreshDisk() }
+        .task { await model.updates.checkAutomatically() }
         .sheet(item: $model.confirmation) { captured in
             ConfirmationView(confirmation: captured, onCancel: { model.confirmation = nil }, onConfirm: { model.clean(captured) })
                 .environment(\.locale, model.language.locale)
         }
         .sheet(isPresented: $model.showIssues) { issuesSheet.environment(\.locale, model.language.locale) }
+        .sheet(isPresented: $model.showUpdates) { AppUpdateView(updates: model.updates).environment(\.locale, model.language.locale) }
         .sheet(item: $model.inspectedItem) { item in FindingDetailView(item: item).environment(\.locale, model.language.locale) }
         .sheet(item: $model.applicationPlan) { plan in ApplicationReviewView(model: model, plan: plan).environment(\.locale, model.language.locale) }
         .alert(L10n.text("Không thể thực hiện"), isPresented: Binding(
@@ -105,9 +107,10 @@ struct Dashboard: View {
             Spacer(minLength: 20)
             VStack(alignment: .leading, spacing: 8) {
                 Label("Riêng tư từ thiết kế", systemImage: "lock.shield").font(.system(size: 12, weight: .medium)).foregroundStyle(Palette.mint)
-                Text("Chạy trên Mac của bạn.\nKhông tài khoản. Không gửi dữ liệu.")
+                Text("Quét cục bộ. Không tài khoản.\nKhông gửi dữ liệu quét.")
                     .font(.system(size: 10)).foregroundStyle(.white.opacity(0.5)).lineSpacing(4)
-                Text("v0.3.0 · Mã nguồn mở").font(.system(size: 9)).foregroundStyle(.white.opacity(0.3)).padding(.top, 7)
+                UpdateStatusButton(updates: model.updates) { model.showUpdates = true }.disabled(model.hasOpenReview)
+                Text("v\(model.updates.currentVersion) · Mã nguồn mở").font(.system(size: 9)).foregroundStyle(.white.opacity(0.3)).padding(.top, 7)
             }
         }
         .padding(24)

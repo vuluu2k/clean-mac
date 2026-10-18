@@ -5,6 +5,7 @@
 **Dọn gọn. Nhẹ máy. Không thuê bao.**
 
 App macOS native miễn phí, mã nguồn mở, viết bằng SwiftUI. Quét dữ liệu có thể dọn, giải thích lý do và để bạn quyết định. Không server, tài khoản, AI cloud hay telemetry.
+Kiểm tra cập nhật (mặc định tắt) chỉ đọc phiên bản công khai trên GitHub; không gửi dữ liệu quét.
 
 ## Tải bản dựng sẵn
 
