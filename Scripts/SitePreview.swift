@@ -44,7 +44,7 @@ import SwiftUI
             _ = try file("Library/Preferences/com.example.studio.plist")
             _ = try file("Library/Sample/read-only.bin", bytes: 120_000_000)
             (mode.hasSuffix("-vi") ? AppLanguage.vietnamese : .english).save()
-            let updates = AppUpdates(currentVersion: "0.4.0", checker: { _ in
+            let updates = AppUpdates(checker: { _ in
                 ReleaseUpdate(version: ReleaseVersion("0.5.0")!, url: URL(string: "https://github.com/vuluu2k/clean-mac/releases/tag/v0.5.0")!)
             })
             precondition(!updates.automaticallyChecks)
@@ -93,18 +93,41 @@ import SwiftUI
                 }
             }
             try await Task.sleep(for: .seconds(1))
-            let frame = window.frame
-            let screenHeight = NSScreen.screens[0].frame.height
-            let rect = "\(Int(frame.minX)),\(Int(screenHeight - frame.maxY)),\(Int(frame.width)),\(Int(frame.height))"
-            let capture = Process()
-            capture.executableURL = URL(fileURLWithPath: "/usr/sbin/screencapture")
-            capture.arguments = ["-x", "-R", rect, output]
-            try capture.run()
-            capture.waitUntilExit()
-            precondition(capture.terminationStatus == 0)
-            print("CAPTURED \(mode) \(Int(frame.width))x\(Int(frame.height)) sample roots only, fixed disk, fake updates, blocked Trash")
-            NSApp.terminate(nil)
+            try render().write(to: URL(fileURLWithPath: output))
+            print("CAPTURED \(mode) sample roots only, fixed disk, fake updates, blocked Trash")
+            exit(0)
         } catch { fail(error) }
+    }
+
+    // Renders in-process, so no Screen Recording permission is needed. Sheets are drawn over a dimmed window.
+    private func render() throws -> Data {
+        func bitmap(_ window: NSWindow) -> NSBitmapImageRep {
+            let view = window.contentView!.superview ?? window.contentView!
+            let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds)!
+            view.cacheDisplay(in: view.bounds, to: rep)
+            return rep
+        }
+        let base = bitmap(window)
+        guard window.attachedSheet != nil else { return base.representation(using: .png, properties: [:])! }
+        let size = window.frame.size
+        let image = NSImage(size: size)
+        image.lockFocus()
+        base.draw(in: NSRect(origin: .zero, size: size))
+        var parent: NSWindow = window
+        while let sheet = parent.attachedSheet {
+            NSColor.black.withAlphaComponent(0.15).setFill()
+            NSRect(origin: .zero, size: size).fill(using: .sourceOver)
+            let frame = sheet.frame.offsetBy(dx: -window.frame.minX, dy: -window.frame.minY)
+            NSAppearance(named: .darkAqua)!.performAsCurrentDrawingAppearance {
+                NSColor.windowBackgroundColor.setFill()
+                NSBezierPath(roundedRect: frame, xRadius: 10, yRadius: 10).fill()
+            }
+            bitmap(sheet).draw(in: frame)
+            parent = sheet
+        }
+        image.unlockFocus()
+        let rep = NSBitmapImageRep(data: image.tiffRepresentation!)!
+        return rep.representation(using: .png, properties: [:])!
     }
 
     private func fail(_ error: Error) -> Never {

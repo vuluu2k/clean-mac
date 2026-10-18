@@ -24,6 +24,13 @@ function applyLanguage(next) {
     const value = text[element.dataset.i18nAria];
     if (typeof value === "string") element.setAttribute("aria-label", value);
   });
+  document.querySelectorAll("[data-i18n-alt]").forEach(element => {
+    const value = text[element.dataset.i18nAlt];
+    if (typeof value === "string") element.alt = value;
+  });
+  document.querySelectorAll("[data-shot]").forEach(image => {
+    image.src = `./assets/screenshots/${image.dataset.shot}-${language}.webp`;
+  });
   document.querySelectorAll("[data-language]").forEach(button => {
     button.setAttribute("aria-pressed", String(button.dataset.language === language));
   });
@@ -35,6 +42,27 @@ document.querySelectorAll("[data-language]").forEach(button => {
   button.addEventListener("click", () => {
     applyLanguage(button.dataset.language);
     try { localStorage.setItem(storageKey, language); } catch { /* The interface still works without storage. */ }
+  });
+});
+
+const tabs = [...document.querySelectorAll('[role="tab"]')];
+function selectTab(selected, focus) {
+  tabs.forEach(tab => {
+    const active = tab === selected;
+    tab.setAttribute("aria-selected", String(active));
+    tab.tabIndex = active ? 0 : -1;
+    document.getElementById(tab.getAttribute("aria-controls")).hidden = !active;
+  });
+  if (focus) selected.focus();
+}
+tabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => selectTab(tab, false));
+  tab.addEventListener("keydown", event => {
+    const last = tabs.length - 1;
+    const target = { ArrowRight: index === last ? 0 : index + 1, ArrowLeft: index === 0 ? last : index - 1, Home: 0, End: last }[event.key];
+    if (target === undefined) return;
+    event.preventDefault();
+    selectTab(tabs[target], true);
   });
 });
 

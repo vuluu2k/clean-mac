@@ -12,7 +12,7 @@ const controller = readFileSync(resolve(root, "site/site.mjs"), "utf8");
 
 test("both languages cover every page and accessibility key", () => {
   assert.deepEqual(Object.keys(messages.en).sort(), Object.keys(messages.vi).sort());
-  for (const match of html.matchAll(/data-i18n(?:-aria)?="([^"]+)"/g)) {
+  for (const match of html.matchAll(/data-i18n(?:-aria|-alt)?="([^"]+)"/g)) {
     for (const language of ["en", "vi"]) assert.ok(messages[language][match[1]]?.trim(), `${language}: ${match[1]}`);
   }
   for (const text of Object.values(messages.en)) assert.equal(typeof text, "string");
@@ -46,6 +46,21 @@ test("mobile source link remains named and native controls are accessible", () =
   assert.match(html, /id="copy-status"[^>]*role="status"/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /:focus-visible/);
+});
+
+test("screenshot tabs are accessible and every language variant exists", () => {
+  assert.equal((html.match(/role="tablist"/g) ?? []).length, 1);
+  const tabs = [...html.matchAll(/role="tab" id="([^"]+)" aria-controls="([^"]+)"/g)];
+  assert.equal(tabs.length, 4);
+  for (const [, tab, panel] of tabs) assert.match(html, new RegExp(`role="tabpanel" id="${panel}" aria-labelledby="${tab}"`));
+  const shots = [...html.matchAll(/data-shot="([^"]+)"/g)].map(m => m[1]);
+  assert.equal(shots.length, 4);
+  for (const shot of shots) for (const language of ["en", "vi"]) {
+    assert.ok(existsSync(resolve(root, `site/assets/screenshots/${shot}-${language}.webp`)), `${shot}-${language}`);
+  }
+  assert.match(controller, /ArrowRight/);
+  assert.match(controller, /Home/);
+  assert.match(controller, /End/);
 });
 
 test("download links match the native app version and include verification guidance", () => {
