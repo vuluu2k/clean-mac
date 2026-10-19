@@ -10,7 +10,7 @@ Optional update check (off by default) reads public release metadata from GitHub
 
 ## Download
 
-[Download Universal DMG — v0.4.0](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.0/clean-mac-0.4.0-universal.dmg) · [SHA256SUMS](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.0/SHA256SUMS)
+[Download Universal DMG — v0.4.1](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.1/clean-mac-0.4.1-universal.dmg) · [SHA256SUMS](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.1/SHA256SUMS)
 
 The app includes Apple silicon and Intel code for macOS 14+. Intel hardware still needs manual verification.
 **This download is ad-hoc signed, not Developer ID signed or notarized. macOS can block it.**
@@ -46,7 +46,7 @@ Existing results, filters and file selections stay intact. No restart or new sca
 Language changes are disabled during an operation or an open review/confirmation.
 System permission dialogs, native errors and disk-size formatting can follow macOS language or region settings.
 
-## Features in 0.4.0
+## Features in 0.4.1
 
 - Real disk capacity, background scans, progress, cancellation and bounded live previews.
 - **Quick scan** for known cleanup locations and explicit **Deep volume scan** for accessible startup-volume metadata.

@@ -9,7 +9,7 @@ Kiểm tra cập nhật (mặc định tắt) chỉ đọc phiên bản công kh
 
 ## Tải bản dựng sẵn
 
-[Tải DMG Universal — v0.4.0](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.0/clean-mac-0.4.0-universal.dmg) · [SHA256SUMS](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.0/SHA256SUMS)
+[Tải DMG Universal — v0.4.1](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.1/clean-mac-0.4.1-universal.dmg) · [SHA256SUMS](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.1/SHA256SUMS)
 
 App chứa mã Apple silicon và Intel cho macOS 14+. Phần cứng Intel vẫn cần kiểm tra thủ công.
 **Bản này ký ad-hoc, chưa ký Developer ID hoặc notarize. macOS có thể chặn.** Hãy đọc [hướng dẫn cài và bảo mật](INSTALL.md) trước khi mở DMG. Bạn vẫn có thể tự build từ mã nguồn.
@@ -40,7 +40,7 @@ Chọn **Tiếng Việt** hoặc **English** ở đầu thanh bên, cạnh biể
 
 Bộ chọn bị khóa khi có tác vụ hoặc màn hình xem lại/xác nhận. Hộp thoại quyền, lỗi gốc của hệ thống và định dạng dung lượng có thể theo ngôn ngữ/vùng của macOS.
 
-## Có gì trong v0.4.0
+## Có gì trong v0.4.1
 
 - Thông báo cập nhật tùy chọn: tự bấm kiểm tra hoặc bật kiểm tra mỗi ngày khi mở app qua GitHub Releases. Không tự tải hay tự cài.
 - Dashboard dung lượng ổ đĩa thực, giao diện Việt/English chuyển đổi được, hỗ trợ giao diện sáng/tối của hệ thống.
