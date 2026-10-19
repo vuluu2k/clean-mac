@@ -5,11 +5,11 @@
 **Dọn gọn. Nhẹ máy. Không thuê bao.**
 
 App macOS native miễn phí, mã nguồn mở, viết bằng SwiftUI. Quét dữ liệu có thể dọn, giải thích lý do và để bạn quyết định. Không server, tài khoản, AI cloud hay telemetry.
-Từ v0.4.0: kiểm tra cập nhật (mặc định tắt) chỉ đọc phiên bản công khai trên GitHub; không gửi dữ liệu quét.
+Kiểm tra cập nhật (mặc định tắt) chỉ đọc phiên bản công khai trên GitHub; không gửi dữ liệu quét.
 
 ## Tải bản dựng sẵn
 
-[Tải DMG Universal — v0.3.0](https://github.com/vuluu2k/clean-mac/releases/download/v0.3.0/clean-mac-0.3.0-universal.dmg) · [SHA256SUMS](https://github.com/vuluu2k/clean-mac/releases/download/v0.3.0/SHA256SUMS)
+[Tải DMG Universal — v0.4.0](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.0/clean-mac-0.4.0-universal.dmg) · [SHA256SUMS](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.0/SHA256SUMS)
 
 App chứa mã Apple silicon và Intel cho macOS 14+. Phần cứng Intel vẫn cần kiểm tra thủ công.
 **Bản này ký ad-hoc, chưa ký Developer ID hoặc notarize. macOS có thể chặn.** Hãy đọc [hướng dẫn cài và bảo mật](INSTALL.md) trước khi mở DMG. Bạn vẫn có thể tự build từ mã nguồn.
@@ -40,8 +40,9 @@ Chọn **Tiếng Việt** hoặc **English** ở đầu thanh bên, cạnh biể
 
 Bộ chọn bị khóa khi có tác vụ hoặc màn hình xem lại/xác nhận. Hộp thoại quyền, lỗi gốc của hệ thống và định dạng dung lượng có thể theo ngôn ngữ/vùng của macOS.
 
-## Có gì trong v0.3.0
+## Có gì trong v0.4.0
 
+- Thông báo cập nhật tùy chọn: tự bấm kiểm tra hoặc bật kiểm tra mỗi ngày khi mở app qua GitHub Releases. Không tự tải hay tự cài.
 - Dashboard dung lượng ổ đĩa thực, giao diện Việt/English chuyển đổi được, hỗ trợ giao diện sáng/tối của hệ thống.
 - Hai chế độ: **Quét nhanh** và **Quét sâu toàn ổ** khởi động.
 - Quét nền, kết quả tạm cập nhật trong lúc duyệt, tiến độ theo nhóm/đường dẫn và dừng quét.
