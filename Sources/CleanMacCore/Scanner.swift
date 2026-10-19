@@ -13,7 +13,6 @@ public struct Scanner: Sendable {
         let fm = FileManager()
         var report = ScanReport()
         var seen = Set<String>()
-        var visitedEntries = 0
         var lastSnapshot: ContinuousClock.Instant?
         let keys: [URLResourceKey] = [.isDirectoryKey, .isSymbolicLinkKey, .isPackageKey, .isAliasFileKey, .isUbiquitousItemKey]
         func warn(_ url: URL, _ error: Error) {
@@ -41,8 +40,6 @@ public struct Scanner: Sendable {
             }
             while let url = enumerator.nextObject() as? URL {
                 if isCancelled() { report.cancelled = true; break }
-                visitedEntries += 1
-                if visitedEntries > 500_000 || report.items.count >= 20_000 { report.limited = true; break }
                 do {
                     let values = try url.resourceValues(forKeys: Set(keys))
                     let metadata = try FileMetadata.read(url)
@@ -71,7 +68,7 @@ public struct Scanner: Sendable {
                 } catch { warn(url, error) }
             }
             onProgress(ScanProgress(visitedFiles: report.visitedFiles, foundFiles: report.items.count, category: root.category))
-            if report.cancelled || report.limited { break }
+            if report.cancelled { break }
         }
         report.items.sort { $0.bytes == $1.bytes ? $0.id < $1.id : $0.bytes > $1.bytes }
         onSnapshot(report.preview)

@@ -6,14 +6,13 @@ struct UpdateStatusButton: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
-            if case .available = updates.state {
+        // Only an available update earns sidebar space; manual checks live in the app menu.
+        if case .available = updates.state {
+            Button(action: action) {
                 Label("Có phiên bản mới", systemImage: "arrow.down.circle.fill").foregroundStyle(Palette.mint)
-            } else {
-                Label("Kiểm tra cập nhật…", systemImage: "arrow.triangle.2.circlepath").foregroundStyle(.white.opacity(0.65))
             }
+            .font(.system(size: 11)).buttonStyle(.plain).padding(.vertical, 5)
         }
-        .font(.system(size: 11)).buttonStyle(.plain).padding(.vertical, 5)
     }
 }
 

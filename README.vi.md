@@ -47,7 +47,7 @@ Bộ chọn bị khóa khi có tác vụ hoặc màn hình xem lại/xác nhận
 - Hai chế độ: **Quét nhanh** và **Quét sâu toàn ổ** khởi động.
 - Quét nền, kết quả tạm cập nhật trong lúc duyệt, tiến độ theo nhóm/đường dẫn và dừng quét.
 - Tách lượt kiểm tra tệp/thư mục, dung lượng logic đã ghi nhận, lỗi đọc và số gợi ý hiển thị.
-- Tổng hợp thư mục từ 100 MB, kể cả khi từng tệp đều nhỏ; chỉ phân tích và mở Finder, không xóa thư mục.
+- Tổng hợp thư mục từ 10 MB, kể cả khi từng tệp đều nhỏ; chỉ phân tích và mở Finder, không xóa thư mục.
 - Nhận diện dữ liệu **nghi còn sót** của app theo bundle ID, danh mục `.app` và LaunchServices.
 - Bộ lọc **Khuyên dọn / Cần xem lại / Không nên xóa**, có lý do; mục bị khóa không thể chọn dọn.
 - Trang **Gỡ ứng dụng**: danh mục app, xem dữ liệu khớp bundle ID và xác nhận riêng trước khi chuyển vào Trash.
@@ -66,10 +66,10 @@ Bộ chọn bị khóa khi có tác vụ hoặc màn hình xem lại/xác nhận
 | Log cũ | `~/Library/Logs` | Không sửa đổi ít nhất 14 ngày |
 | Build Xcode | `~/Library/Developer/Xcode/DerivedData` | Từng tệp không sửa đổi ít nhất 30 ngày |
 | Bộ cài cũ | `~/Downloads` | `.dmg`, `.pkg`, `.mpkg` không sửa đổi ít nhất 30 ngày |
-| Tệp lớn | Downloads và thư mục được thêm | Từ 100 MB, luôn cần bạn tự xem xét |
+| Tệp lớn | Downloads và thư mục được thêm | Từ 10 MB, luôn cần bạn tự xem xét |
 | Dữ liệu app còn sót | Các vị trí Library có tên bundle ID rõ ràng | Không thấy app tương ứng; chỉ là nghi vấn |
 | Phân tích toàn ổ | Phần ổ khởi động có quyền đọc | Tệp từ 10 MB; chỉ xem nếu ngoài phạm vi dọn |
-| Thư mục chiếm dung lượng | Các tệp đọc được trong lượt quét sâu | Tổng từ 100 MB, gồm cả tệp nhỏ; luôn chỉ xem |
+| Thư mục chiếm dung lượng | Các tệp đọc được trong lượt quét sâu | Tổng từ 10 MB, gồm cả tệp nhỏ; luôn chỉ xem |
 
 **Tệp cũ hoặc tệp lớn không đồng nghĩa với không còn dùng.** App dùng ngày sửa đổi, không coi ngày truy cập là bằng chứng. Bộ cài mới nhưng lớn vẫn có thể xuất hiện trong nhóm Tệp lớn.
 
@@ -86,7 +86,7 @@ Chỉ từng tệp thường trong phạm vi an toàn mới được đưa vào 
 
 **Ít gợi ý không có nghĩa là ít tệp được quét.** Các tệp dưới 10 MB vẫn được tính vào dung lượng thư mục. Số lượt kiểm tra có thể trùng giữa giai đoạn nhanh và sâu. Dung lượng logic đã ghi nhận không phải dung lượng rác hay số byte có thể thu hồi.
 
-Thống kê thư mục giữ tối đa 50.000 đường dẫn, sâu 8 cấp và hiển thị 100 mục lớn nhất từ 100 MB. Chạm giới hạn tổng hợp không dừng lượt duyệt tệp; app báo giới hạn chi tiết. Thư mục cha đã gồm con: không cộng các hàng với nhau. Số liệu chỉ phản ánh phần đọc được và thời điểm quét.
+Thống kê thư mục giữ tối đa 50.000 đường dẫn, sâu 8 cấp và hiển thị 100 mục lớn nhất từ 10 MB. Chạm giới hạn tổng hợp không dừng lượt duyệt tệp; app báo giới hạn chi tiết. Thư mục cha đã gồm con: không cộng các hàng với nhau. Số liệu chỉ phản ánh phần đọc được và thời điểm quét.
 
 Quét sâu duyệt metadata ở `/Applications`, `/Library`, `/System`, `/Users`, `/private`, `/usr`, `/opt` và các phần khác của ổ khởi động mà macOS cho đọc. Chế độ này bao gồm mục ẩn và nội dung package khi phân tích, nhưng không cho xóa chúng tùy tiện.
 
@@ -157,8 +157,7 @@ Cache có thể chứa dữ liệu offline. Dọn cache có thể yêu cầu t�
 - Không dọn database nhận diện qua đuôi `.db`, `.sqlite`, `.sqlite3`, kèm journal/WAL/SHM, hoặc tệp tải dở thông dụng.
 - Trước mỗi thao tác Trash, kiểm tra lại phạm vi, đường dẫn, loại tệp, device/inode, kích thước, mtime và ctime.
 - Khi tệp thay đổi hoặc mất quyền truy cập, giữ nguyên và yêu cầu quét lại.
-- Quét nhanh giới hạn 500.000 mục duyệt. Quét sâu không dừng duyệt theo số lượng nhưng chỉ lưu kết quả giới hạn.
-- Giữ tối đa 20.000 kết quả cuối và 100 cảnh báo. Khi chạm giới hạn, app báo rõ kết quả chưa đầy đủ.
+- Quét nhanh và quét sâu không dừng sau một số mục cố định; kết quả cuối không giới hạn số tệp. Giữ tối đa 100 cảnh báo.
 
 API Trash nhận đường dẫn. Kiểm tra lại không loại bỏ hoàn toàn cuộc đua đổi tên đường dẫn do tiến trình khác gây ra. App không phải sandbox bảo mật. Không chạy bằng quyền quản trị.
 

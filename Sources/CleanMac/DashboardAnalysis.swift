@@ -48,7 +48,7 @@ extension Dashboard {
                 Text("Cộng cả tệp nhỏ, không chỉ tệp từ 10 MB. Thư mục lớn không có nghĩa là rác; app không cho chọn dọn cả thư mục.")
                     .font(.system(size: 11)).foregroundStyle(.secondary)
                 if folders.isEmpty {
-                    Text(model.phase == .scanning ? "Đang tổng hợp thư mục từ 100 MB…" : "Chưa có thư mục từ 100 MB khớp tìm kiếm trong phần đọc được.")
+                    Text(model.phase == .scanning ? "Đang tổng hợp thư mục từ 10 MB…" : "Chưa có thư mục từ 10 MB khớp tìm kiếm trong phần đọc được.")
                         .font(.system(size: 11)).foregroundStyle(.secondary).padding(.vertical, 10)
                 }
                 LazyVStack(spacing: 0) {

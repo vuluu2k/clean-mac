@@ -235,7 +235,7 @@ final class AppModel: ObservableObject {
         panel.treatsFilePackagesAsDirectories = false
         panel.directoryURL = policy.home
         panel.prompt = L10n.text("Thêm thư mục")
-        panel.message = L10n.text("Chọn thư mục bên trong Home để tìm tệp từ 100 MB. Không quét Library, package hoặc liên kết.")
+        panel.message = L10n.text("Chọn thư mục bên trong Home để tìm tệp từ 10 MB. Không quét Library, package hoặc liên kết.")
         guard panel.runModal() == .OK else { return }
         for url in panel.urls {
             do {

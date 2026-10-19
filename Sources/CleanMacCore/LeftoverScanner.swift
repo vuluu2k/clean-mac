@@ -44,7 +44,7 @@ public struct LeftoverScanner: Sendable {
         func append(_ url: URL) {
             do {
                 if let item = try candidate(at: url, revalidate: false) {
-                    if report.items.count < 20_000 { report.items.append(item) } else { report.limited = true }
+                    report.items.append(item)
                 }
             } catch { warn(url, error) }
         }

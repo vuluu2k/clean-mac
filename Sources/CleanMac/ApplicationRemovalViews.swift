@@ -11,7 +11,9 @@ struct ApplicationReviewView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Label("Xem lại trước khi gỡ \(plan.application.name)", systemImage: "app.badge.checkmark").font(.title2.bold())
+            Label { Text("Xem lại trước khi gỡ \(plan.application.name)") } icon: {
+                Image(nsImage: NSWorkspace.shared.icon(forFile: plan.application.url.path)).resizable().frame(width: 30, height: 30)
+            }.font(.title2.bold())
             Text(plan.application.id).font(.system(size: 11, design: .monospaced)).textSelection(.enabled)
             Text("Bundle ID: \(plan.application.identifier)").font(.callout).foregroundStyle(.secondary)
             HStack {

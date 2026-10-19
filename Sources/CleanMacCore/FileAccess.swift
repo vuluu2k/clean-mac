@@ -54,7 +54,7 @@ struct ScanRoot: Sendable {
 public struct ScanPolicy: Sendable {
     public let home: URL
     public let reviewFolders: [URL]
-    public static let largeFileBytes: Int64 = 100_000_000
+    public static let largeFileBytes: Int64 = 10_000_000
     static let packageExtensions: Set<String> = [
         "app", "bundle", "framework", "plugin", "photoslibrary", "photolibrary", "musiclibrary",
         "xcodeproj", "xcworkspace", "playground", "sparsebundle", "backupbundle"

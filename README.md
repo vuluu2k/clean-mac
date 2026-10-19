@@ -65,10 +65,10 @@ System permission dialogs, native errors and disk-size formatting can follow mac
 | Old logs | `~/Library/Logs` | Unchanged for at least 14 days |
 | Xcode builds | `~/Library/Developer/Xcode/DerivedData` | Each file unchanged for at least 30 days |
 | Old installers | `~/Downloads` | `.dmg`, `.pkg`, `.mpkg` unchanged for at least 30 days |
-| Large files | Downloads and explicitly added Home folders | At least 100 MB, always requires review |
+| Large files | Downloads and explicitly added Home folders | At least 10 MB, always requires review |
 | Suspected app leftovers | Recognized user/system Library locations | Exact bundle ID without a detected owning app |
 | Volume analysis | Accessible startup-volume paths | Files from 10 MB, locked outside cleanup scope |
-| Largest folders | Accessible deep-scan files | Totals from 100 MB, always analysis-only |
+| Largest folders | Accessible deep-scan files | Totals from 10 MB, always analysis-only |
 
 **Old or large does not mean unused.** Rules use modification time, not access time as proof of disuse.
 Recommended cache/log/build files can still contain useful diagnostic or offline data.
@@ -89,8 +89,8 @@ Few suggestions do not mean few inspected files. Deep scans count small files in
 Inspection counts can overlap between stages. Logical bytes are neither garbage estimates nor recoverable physical space.
 Parent folder totals include children. Do not add those rows together.
 
-Previews retain up to 500 files. Final results retain up to 20,000 files and 100 warnings.
-Quick scans inspect at most 500,000 entries. Deep traversal has no entry-count stop.
+Previews retain up to 500 files. Final results have no file-count cap; up to 100 warnings are kept.
+Neither quick nor deep scans stop after a fixed number of entries.
 Folder detail tracks up to eight ancestor levels and 50,000 paths, then shows the largest 100 folders.
 Folder-detail limits do not stop file traversal.
 

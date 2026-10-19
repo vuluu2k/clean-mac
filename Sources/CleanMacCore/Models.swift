@@ -40,7 +40,7 @@ public enum CleanupCategory: String, CaseIterable, Sendable, Identifiable {
         case .logs: L10n.text("Log không sửa đổi ít nhất 14 ngày. Có thể còn cần để chẩn đoán lỗi.")
         case .developer: L10n.text("Tệp trong Xcode DerivedData không sửa đổi ít nhất 30 ngày. Build tiếp theo có thể chậm hơn.")
         case .installers: L10n.text("Bộ cài trong Downloads không sửa đổi ít nhất 30 ngày. Kiểm tra bản cài trước khi dọn.")
-        case .largeFiles: L10n.text("Tệp từ 100 MB. Kích thước không có nghĩa là rác. Chỉ dọn khi bạn chắc chắn không cần.")
+        case .largeFiles: L10n.text("Tệp từ 10 MB. Kích thước không có nghĩa là rác. Chỉ dọn khi bạn chắc chắn không cần.")
         case .appLeftovers: L10n.text("Nghi dữ liệu còn sót theo bundle ID. Không thấy ứng dụng không chứng minh ứng dụng đã gỡ. Xem bằng chứng từng tệp.")
         case .systemFiles: L10n.text("Tệp từ 10 MB trên ổ khởi động. Chỉ phân tích và mở Finder, không cho dọn dữ liệu hệ thống hoặc tệp ngoài phạm vi an toàn.")
         }
@@ -118,7 +118,6 @@ public struct ScanReport: Sendable {
     public var folderUsages: [FolderUsage] = []
     public var folderSummaryLimited = false
     public var cancelled = false
-    public var limited = false
     public var applicationCount: Int?
     public var deepScanCompleted = false
     public var bytes: Int64 { items.reduce(0) { $0 + $1.bytes } }

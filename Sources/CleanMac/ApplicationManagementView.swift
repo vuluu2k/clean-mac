@@ -71,7 +71,8 @@ struct ApplicationManagementView: View {
     private func applicationRow(_ app: InstalledApplication) -> some View {
         let reason = model.applicationProtections[app.id]?.localized()
         return HStack(spacing: 13) {
-            Image(systemName: "app.fill").font(.system(size: 23)).foregroundStyle(reason == nil ? Palette.mint : .secondary)
+            Image(nsImage: NSWorkspace.shared.icon(forFile: app.url.path)).resizable().frame(width: 32, height: 32)
+                .opacity(reason == nil ? 1 : 0.55)
             VStack(alignment: .leading, spacing: 5) {
                 Text(app.name).font(.system(size: 13, weight: .semibold))
                 Text(app.identifier).font(.system(size: 10)).foregroundStyle(.secondary)
@@ -92,11 +93,11 @@ extension Dashboard {
         Button { model.page = .applications } label: {
             HStack(spacing: 11) {
                 Image(systemName: "app.badge.checkmark").frame(width: 18)
-                Text("Gỡ ứng dụng")
+                Text("Gỡ ứng dụng").lineLimit(1).minimumScaleFactor(0.8)
                 Spacer()
                 if let count = model.applicationCatalog?.applications.count { Text("\(count)").font(.system(size: 10, design: .monospaced)) }
             }
-            .font(.system(size: 12, weight: .semibold)).padding(.horizontal, 12).padding(.vertical, 12)
+            .font(.system(size: 12, weight: .semibold)).padding(.horizontal, 10).padding(.vertical, 12)
             .foregroundStyle(model.page == .applications ? Palette.mint : .white.opacity(0.65))
             .background(model.page == .applications ? .white.opacity(0.09) : .clear, in: RoundedRectangle(cornerRadius: 9))
             .contentShape(Rectangle())

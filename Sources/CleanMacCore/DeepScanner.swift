@@ -32,7 +32,7 @@ public struct DeepScanner: Sendable {
             category: .appLeftovers, currentPath: "Đang lập danh mục ứng dụng .app"))
         var inventory = ApplicationInventory.scan(
             roots: ApplicationInventory.defaultRoots(home: policy.home, systemRoot: systemRoot), isCancelled: isCancelled)
-        var systemItems = LargestFileResults(limit: 20_000)
+        var systemItems: [ScanItem] = []
         var folders = FolderUsageAccumulator(root: systemRoot)
         var scannedBytes: Int64 = 0
         var visited = report.visitedFiles
@@ -40,19 +40,18 @@ public struct DeepScanner: Sendable {
         var entries = 0
         var lastSnapshot: ContinuousClock.Instant?
 
-        func mergedItems(extra: [ScanItem] = [], limit: Int) -> (items: [ScanItem], limited: Bool) {
-            var items = Dictionary(uniqueKeysWithValues: systemItems.largest.map { ($0.id, $0) })
+        func mergedItems(extra: [ScanItem] = [], limit: Int = .max) -> [ScanItem] {
+            var items = Dictionary(uniqueKeysWithValues: systemItems.map { ($0.id, $0) })
             for item in report.items + extra { items[item.id] = item }
             let prioritized = items.values.sorted {
                 if ($0.category == .appLeftovers) != ($1.category == .appLeftovers) { return $0.category == .appLeftovers }
                 return $0.bytes == $1.bytes ? $0.id < $1.id : $0.bytes > $1.bytes
             }
-            let kept = Array(prioritized.prefix(limit)).sorted { $0.bytes == $1.bytes ? $0.id < $1.id : $0.bytes > $1.bytes }
-            return (kept, items.count > limit)
+            return Array(prioritized.prefix(limit)).sorted { $0.bytes == $1.bytes ? $0.id < $1.id : $0.bytes > $1.bytes }
         }
         func publish() {
             var snapshot = report
-            snapshot.items = mergedItems(limit: 500).items
+            snapshot.items = mergedItems(limit: 500)
             snapshot.visitedFiles = visited
             snapshot.visitedDirectories = directories
             snapshot.scannedBytes = scannedBytes
@@ -77,7 +76,7 @@ public struct DeepScanner: Sendable {
                 scannedBytes += metadata.snapshot.size
                 folders.record(file: url, bytes: metadata.snapshot.size)
                 if metadata.snapshot.size >= Self.minimumFileBytes {
-                    systemItems.insert(ScanItem(url: url, category: .systemFiles, snapshot: metadata.snapshot, isReadOnly: true))
+                    systemItems.append(ScanItem(url: url, category: .systemFiles, snapshot: metadata.snapshot, isReadOnly: true))
                 }
             }
             if entries % 200 == 0 {
@@ -96,7 +95,6 @@ public struct DeepScanner: Sendable {
         report.scannedBytes = scannedBytes
         report.folderUsages = folders.largest
         report.folderSummaryLimited = folders.limited
-        report.limited = report.limited || systemItems.limited
         report.cancelled = status.cancelled || isCancelled()
         report.applicationCount = inventory.identifiers.count
         report.warnings = Array((report.warnings + inventory.warnings).prefix(100))
@@ -109,12 +107,9 @@ public struct DeepScanner: Sendable {
             leftovers = LeftoverScanner(policy: policy, inventory: inventory, systemRoot: systemRoot, isRegistered: isRegistered).scan(isCancelled: isCancelled)
         }
         report.cancelled = report.cancelled || leftovers.cancelled
-        report.limited = report.limited || leftovers.limited
         report.warnings = Array((report.warnings + leftovers.warnings).prefix(100))
         report.readErrors += leftovers.warnings.count
-        let merged = mergedItems(extra: leftovers.items, limit: 20_000)
-        report.limited = report.limited || merged.limited
-        report.items = merged.items
+        report.items = mergedItems(extra: leftovers.items)
         report.deepScanCompleted = !report.cancelled
         return report
     }

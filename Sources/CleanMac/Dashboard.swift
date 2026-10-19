@@ -113,9 +113,9 @@ struct Dashboard: View {
                 Text("v\(model.updates.currentVersion) · Mã nguồn mở").font(.system(size: 9)).foregroundStyle(.white.opacity(0.3)).padding(.top, 7)
             }
         }
-        .padding(24)
+        .padding(.vertical, 24).padding(.horizontal, 18)
         }
-        .frame(width: 228).frame(maxHeight: .infinity)
+        .frame(width: 244).frame(maxHeight: .infinity)
         .foregroundStyle(.white)
         .background(LinearGradient(colors: [Palette.dark, Color(red: 0.04, green: 0.09, blue: 0.10)], startPoint: .topLeading, endPoint: .bottomTrailing))
     }
@@ -125,7 +125,7 @@ struct Dashboard: View {
         return Button { model.page = .cleaner; model.category = category } label: {
             HStack(spacing: 11) {
                 Image(systemName: symbol).frame(width: 18)
-                Text(title)
+                Text(title).lineLimit(1).minimumScaleFactor(0.8)
                 Spacer()
                 if model.hasVisibleResults {
                     Text("\(model.report.items.filter { category == nil || $0.category == category }.count)")
@@ -134,7 +134,7 @@ struct Dashboard: View {
             }
             .font(.system(size: 12, weight: selected ? .semibold : .regular))
             .foregroundStyle(selected ? Palette.mint : .white.opacity(0.65))
-            .padding(.horizontal, 12).padding(.vertical, 12)
+            .padding(.horizontal, 10).padding(.vertical, 12)
             .background(selected ? .white.opacity(0.09) : .clear, in: RoundedRectangle(cornerRadius: 9))
             .contentShape(Rectangle())
         }
@@ -171,8 +171,8 @@ struct Dashboard: View {
             Text("Đã nhận diện \(count) bundle ID · \(model.report.leftoverApplicationCount) nhóm nghi còn sót · \(bytesText(model.report.cleanupBytes)) có thể chọn dọn")
                 .font(.system(size: 11)).foregroundStyle(.secondary)
         }
-        if model.report.cancelled || model.report.limited {
-            notice("Kết quả chưa đầy đủ", detail: model.report.cancelled ? "Bạn đã dừng quét. Các mục bên dưới chỉ là kết quả một phần." : "Đã chạm giới hạn kết quả: lưu tối đa 20.000 mục. Quét nhanh còn giới hạn 500.000 mục duyệt; kết quả không đại diện đầy đủ toàn ổ.", symbol: "exclamationmark.triangle", color: .orange)
+        if model.report.cancelled {
+            notice("Kết quả chưa đầy đủ", detail: "Bạn đã dừng quét. Các mục bên dưới chỉ là kết quả một phần.", symbol: "exclamationmark.triangle", color: .orange)
         }
         if let cleanup = model.cleanupReport {
             notice("Đã chuyển \(cleanup.moved.count) tệp (\(bytesText(cleanup.bytes))) vào Trash", detail: "Chưa giải phóng dung lượng. Bạn tự Empty Trash trong Finder sau khi kiểm tra. Có thể dùng Put Back để khôi phục.", symbol: cleanup.failures.isEmpty ? "checkmark.circle" : "exclamationmark.triangle", color: cleanup.failures.isEmpty ? .green : .orange)

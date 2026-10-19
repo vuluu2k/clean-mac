@@ -38,7 +38,7 @@
 "Cache/log khớp bundle ID, cũ ít nhất 14 ngày; có thể phải tạo lại hoặc mất dữ liệu offline." = "Cache/log matching the bundle ID, at least 14 days old. It may need rebuilding or contain offline data.";
 "Chuyển %lld tệp vào Trash" = "Move selected files to Trash (%lld)";
 "Chuyển vào Trash chưa làm tăng dung lượng trống. App không Empty Trash. Dùng Finder → Put Back để khôi phục khi có thể." = "Moving to Trash does not free space. The app never empties Trash. Use Finder → Put Back to restore items when available.";
-"Chưa có thư mục từ 100 MB khớp tìm kiếm trong phần đọc được." = "No accessible folders of at least 100 MB match this search.";
+"Chưa có thư mục từ 10 MB khớp tìm kiếm trong phần đọc được." = "No accessible folders of at least 10 MB match this search.";
 "Chưa giải phóng dung lượng. Bạn tự Empty Trash trong Finder sau khi kiểm tra. Có thể dùng Put Back để khôi phục." = "Space has not been freed. Review Trash in Finder before emptying it yourself. Use Put Back to restore items.";
 "Chưa gỡ %@. Xem lý do bên dưới." = "%@ was not removed. See the reasons below.";
 "Chưa đọc nội dung thư mục. Chọn chế độ rồi bấm Quét để bắt đầu." = "No folders scanned yet. Choose a mode and start a scan.";
@@ -52,7 +52,7 @@
 "Chọn %@" = "Select %@";
 "Chọn app → xem app và dữ liệu liên quan → xác nhận chuyển vào Trash. Không tự dừng ứng dụng, không gỡ dịch vụ/driver và không xóa vĩnh viễn." = "Choose an app → review its related files → confirm moving to Trash. No force quit, service/driver removal or permanent deletion.";
 "Chọn dữ liệu khuyên dọn" = "Select recommended data";
-"Chọn thư mục bên trong Home để tìm tệp từ 100 MB. Không quét Library, package hoặc liên kết." = "Choose folders inside Home to find files of at least 100 MB. Library, packages and links are excluded.";
+"Chọn thư mục bên trong Home để tìm tệp từ 10 MB. Không quét Library, package hoặc liên kết." = "Choose folders inside Home to find files of at least 10 MB. Library, packages and links are excluded.";
 "Chọn tệp có thể dọn" = "Select eligible files";
 "Container, database, dịch vụ hoặc dữ liệu dùng chung: không cho dọn." = "Container, database, service or shared data: removal locked.";
 "CÒN TRỐNG" = "AVAILABLE";
@@ -160,7 +160,7 @@
 "Tệp lớn" = "Large files";
 "Tệp trong Xcode DerivedData không sửa đổi ít nhất 30 ngày. Build tiếp theo có thể chậm hơn." = "A file in Xcode DerivedData unchanged for at least 30 days. The next build may take longer.";
 "Tệp từ 10 MB trên ổ khởi động. Chỉ phân tích và mở Finder, không cho dọn dữ liệu hệ thống hoặc tệp ngoài phạm vi an toàn." = "A file of at least 10 MB on the startup volume. Analysis and Finder reveal only; system and out-of-scope files cannot be removed.";
-"Tệp từ 100 MB. Kích thước không có nghĩa là rác. Chỉ dọn khi bạn chắc chắn không cần." = "A file of at least 100 MB. Size does not mean unwanted data. Remove only if you no longer need it.";
+"Tệp từ 10 MB. Kích thước không có nghĩa là rác. Chỉ dọn khi bạn chắc chắn không cần." = "A file of at least 10 MB. Size does not mean unwanted data. Remove only if you no longer need it.";
 "Tệp đã thay đổi sau lần quét. Hãy quét lại." = "The file changed after the scan. Scan again.";
 "Tối đa 50.000 mục duyệt và 20.000 tệp liên quan. Không có nghĩa đã tìm hết dữ liệu của app." = "Limited to 50,000 inspected entries and 20,000 related files. This does not mean all app data was found.";
 "Tổng hợp tối đa 8 cấp / 50.000 thư mục; hiển thị 100 mục lớn nhất. Thư mục cha đã gồm thư mục con: không cộng các hàng với nhau. Số liệu là snapshot, có thể một phần khi đang quét hoặc có lỗi đọc." = "Tracks up to 8 levels / 50,000 folders; shows the largest 100. Parent totals include children: do not add the rows together. Totals are snapshots and may be partial during scans or after read errors.";
@@ -184,7 +184,7 @@
 "Đang phân tích…" = "Analyzing…";
 "Đang quét · Danh sách tạm giữ tối đa 500 tệp và cập nhật trong lúc duyệt. Chưa cho phép dọn." = "Scanning · Preview retains up to 500 files and updates during traversal. Cleanup is disabled.";
 "Đang tìm gợi ý…" = "Looking for suggestions…";
-"Đang tổng hợp thư mục từ 100 MB…" = "Collecting folders of at least 100 MB…";
+"Đang tổng hợp thư mục từ 10 MB…" = "Collecting folders of at least 10 MB…";
 "Đang đọc danh mục ứng dụng…" = "Reading the app catalog…";
 "Đang đọc dung lượng" = "Reading disk capacity";
 "Đang đối chiếu dữ liệu ứng dụng còn sót" = "Checking suspected app leftovers";
@@ -192,7 +192,6 @@
 "Đã chuyển %lld tệp (%@) vào Trash" = "Files moved to Trash: %lld (%@)";
 "Đã chuyển app và %lld tệp dữ liệu vào Trash" = "Moved to Trash: the app and data files (%lld)";
 "Đã chạm giới hạn chi tiết thư mục (8 cấp / 50.000 mục). Lượt duyệt tệp vẫn tiếp tục; các thư mục cha đã theo dõi vẫn được cộng dung lượng." = "Folder detail limit reached (8 levels / 50,000 entries). File traversal continues; tracked parents still accumulate sizes.";
-"Đã chạm giới hạn kết quả: lưu tối đa 20.000 mục. Quét nhanh còn giới hạn 500.000 mục duyệt; kết quả không đại diện đầy đủ toàn ổ." = "Result limit reached: up to 20,000 items retained. Quick scans also inspect at most 500,000 entries; results do not represent the entire volume.";
 "Đã dừng phân tích ứng dụng." = "App analysis stopped.";
 "Đã dừng phân tích. Không thực hiện gỡ ứng dụng." = "Analysis stopped. No app removal performed.";
 "Đã nhận diện %lld bundle ID · %lld nhóm nghi còn sót · %@ có thể chọn dọn" = "Bundle IDs: %lld · Suspected leftover groups: %lld · %@ eligible for review";

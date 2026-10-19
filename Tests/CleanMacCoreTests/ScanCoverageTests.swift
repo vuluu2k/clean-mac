@@ -22,17 +22,6 @@ import Testing
     #expect(report.visitedDirectories >= 4)
 }
 
-@Test func boundedResultsKeepLateLargeFiles() throws {
-    let f = try Fixture()
-    var results = LargestFileResults(limit: 2)
-    for (index, bytes) in [10_000_000, 20_000_000, 300_000_000, 50_000_000, 400_000_000].enumerated() {
-        let url = try f.file("files/\(index)", bytes: bytes)
-        results.insert(ScanItem(url: url, category: .systemFiles, snapshot: try FileMetadata.read(url).snapshot))
-    }
-    #expect(results.largest.map(\.bytes) == [400_000_000, 300_000_000])
-    #expect(results.count == 2 && results.limited)
-}
-
 @Test(arguments: [ScanMode.quick, .deep])
 func liveScanSnapshotsArriveBeforeCompletion(mode: ScanMode) throws {
     let f = try Fixture()

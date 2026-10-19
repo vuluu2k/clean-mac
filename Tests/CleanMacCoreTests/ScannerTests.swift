@@ -52,11 +52,20 @@ final class Fixture {
     _ = try f.file("Library/Developer/Xcode/DerivedData/project/fresh.o", daysOld: 29)
     let installer = try f.file("Downloads/old.dmg", daysOld: 30)
     _ = try f.file("Downloads/new.dmg", daysOld: 29)
-    let large = try f.file("Downloads/large.zip", daysOld: 0, bytes: 100_000_000)
-    _ = try f.file("Downloads/under.zip", bytes: 99_999_999)
+    let large = try f.file("Downloads/large.zip", daysOld: 0, bytes: Int(ScanPolicy.largeFileBytes))
+    _ = try f.file("Downloads/under.zip", bytes: Int(ScanPolicy.largeFileBytes) - 1)
     let report = Scanner(policy: ScanPolicy(home: f.home)).scan(now: f.now)
     let categories = Dictionary(uniqueKeysWithValues: report.items.map { ($0.url, $0.category) })
     #expect(categories == [boundary: .caches, log: .logs, build: .developer, installer: .installers, large: .largeFiles])
+}
+
+@Test func quickScanHasNoResultCapAndReachesEveryRoot() throws {
+    let f = try Fixture()
+    for index in 0..<20_050 { _ = try f.file("Library/Caches/many/\(index)", bytes: 1) }
+    let late = try f.file("Downloads/late.zip", daysOld: 0, bytes: Int(ScanPolicy.largeFileBytes))
+    let report = Scanner(policy: ScanPolicy(home: f.home)).scan(now: f.now)
+    #expect(report.items.count == 20_051)
+    #expect(report.items.contains { $0.url == late })
 }
 
 @Test func skipsSymlinksHardLinksHiddenFilesPackagesAndDatabases() throws {

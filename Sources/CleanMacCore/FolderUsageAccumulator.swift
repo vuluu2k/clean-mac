@@ -24,7 +24,7 @@ struct FolderUsageAccumulator {
     }
 
     var largest: [FolderUsage] {
-        Array(totals.values.filter { $0.bytes >= 100_000_000 }
+        Array(totals.values.filter { $0.bytes >= ScanPolicy.largeFileBytes }
             .sorted { $0.bytes == $1.bytes ? $0.id < $1.id : $0.bytes > $1.bytes }.prefix(100))
     }
 }
