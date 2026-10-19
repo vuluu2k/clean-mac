@@ -44,17 +44,17 @@
 
   <main id="main" tabindex="-1">
     <section class="hero wrap" aria-labelledby="hero-title">
-      <a class="release-tag" href="https://github.com/vuluu2k/clean-mac/blob/main/README.md"><span class="status-dot" aria-hidden="true"></span><span data-i18n="release">v0.4.1 · Free & open source</span><span aria-hidden="true">↗</span></a>
+      <a class="release-tag" href="https://github.com/vuluu2k/clean-mac/blob/main/README.md"><span class="status-dot" aria-hidden="true"></span><span data-i18n="release">v0.4.2 · Free & open source</span><span aria-hidden="true">↗</span></a>
       <h1 id="hero-title"><span data-i18n="heroLine1">Your Mac.</span> <span data-i18n="heroLine2">Your files.</span> <span class="accent-text" data-i18n="heroLine3">Your call.</span></h1>
       <p class="hero-description" data-i18n="heroBody">Understand what takes up space. Review the suggestions. Remove only what you choose — with a native app that keeps you in control.</p>
       <div class="hero-buttons">
-        <a class="button primary" id="download-app" href="https://github.com/vuluu2k/clean-mac/releases/download/v0.4.1/clean-mac-0.4.1-universal.dmg"><span data-i18n="heroDownload">Download for macOS</span><span aria-hidden="true">↓</span></a>
+        <a class="button primary" id="download-app" href="https://github.com/vuluu2k/clean-mac/releases/download/v0.4.2/clean-mac-0.4.2-universal.dmg"><span data-i18n="heroDownload">Download for macOS</span><span aria-hidden="true">↓</span></a>
         <a class="button secondary" href="#install" data-i18n="heroInstall">How to install</a>
       </div>
       <div class="download-details">
-        <p><span data-i18n="downloadInfo">Universal DMG · Apple silicon + Intel · v0.4.1</span> · <span data-i18n="requirement">macOS 14+ · MIT license · Free</span></p>
+        <p><span data-i18n="downloadInfo">Universal DMG · Apple silicon + Intel · v0.4.2</span> · <span data-i18n="requirement">macOS 14+ · MIT license · Free</span></p>
         <p class="warning-text" data-i18n="downloadWarning">Ad-hoc signed, not notarized. macOS can block this download.</p>
-        <p class="detail-links"><a href="https://github.com/vuluu2k/clean-mac/blob/main/INSTALL.md" data-i18n="installGuide">Installation guide</a><a href="https://github.com/vuluu2k/clean-mac/releases/download/v0.4.1/SHA256SUMS" data-i18n="checksums">SHA-256 checksums</a></p>
+        <p class="detail-links"><a href="https://github.com/vuluu2k/clean-mac/blob/main/INSTALL.md" data-i18n="installGuide">Installation guide</a><a href="https://github.com/vuluu2k/clean-mac/releases/download/v0.4.2/SHA256SUMS" data-i18n="checksums">SHA-256 checksums</a></p>
       </div>
     </section>
 
@@ -78,7 +78,7 @@
             <img data-shot="confirm" src="./assets/screenshots/confirm-en.webp" width="1220" height="1040" loading="lazy" alt="Confirmation sheet for uninstalling Sample Studio, listing the app and two selected files with exact paths and a checkbox to agree before they move to Trash." data-i18n-alt="shotConfirmAlt">
           </div>
           <div class="shot-panel" role="tabpanel" id="panel-updates" aria-labelledby="tab-updates" tabindex="0" hidden>
-            <img data-shot="updates" src="./assets/screenshots/updates-en.webp" width="1220" height="1040" loading="lazy" alt="Update notice with a link to download a newer version from GitHub, and the optional launch check, off by default." data-i18n-alt="shotUpdatesAlt">
+            <img data-shot="updates" src="./assets/screenshots/updates-en.webp" width="1220" height="1040" loading="lazy" alt="Update notice with an Update now button, a link to the GitHub release, and the optional launch check, off by default." data-i18n-alt="shotUpdatesAlt">
           </div>
         </div>
         <figcaption data-i18n="previewCaption">Real clean-mac screenshots · Sample data, not a scan of your Mac.</figcaption>
@@ -114,7 +114,7 @@ Not to assume.</h2><p data-i18n="safetyBody">Old does not mean unused. Large doe
           <article><span class="point-icon" aria-hidden="true">01</span><div><h3 data-i18n="safetyLocalTitle">Your files stay on your Mac.</h3><p data-i18n="safetyLocalBody">No account, server, cloud AI or telemetry in the app. Scans read metadata, except bounded app identity plists.</p></div></article>
           <article><span class="point-icon" aria-hidden="true">02</span><div><h3 data-i18n="safetyTrashTitle">Trash, never a deletion shortcut.</h3><p data-i18n="safetyTrashBody">Selected items move through the macOS Trash API. No permanent-delete fallback, force quit or automatic Empty Trash.</p></div></article>
           <article><span class="point-icon" aria-hidden="true">03</span><div><h3 data-i18n="safetyProtectedTitle">Boundaries stay in place.</h3><p data-i18n="safetyProtectedBody">System data is analysis-only. No sudo, privileged helper or SIP bypass. Files are checked again before each move.</p></div></article>
-          <article><span class="point-icon" aria-hidden="true">04</span><div><h3 data-i18n="safetyUpdateTitle">Update notices, only if you ask.</h3><p data-i18n="safetyUpdateBody">The optional update check is off by default. Check manually, or let it check at most once a day on launch. It only reads public GitHub release metadata, sends no scan data, and never downloads or installs anything automatically.</p></div></article>
+          <article><span class="point-icon" aria-hidden="true">04</span><div><h3 data-i18n="safetyUpdateTitle">Update notices, only if you ask.</h3><p data-i18n="safetyUpdateBody">The update check is off by default: check manually, or let it check at most once a day on launch. Update now downloads the release from GitHub only when you click, verifies SHA-256, bundle ID, version and signature, moves the previous app to Trash and reopens. No scan data is sent and nothing installs on its own.</p></div></article>
           <p class="safety-note"><span aria-hidden="true">↳</span><span data-i18n="safetyNote">Moving files to Trash does not free space yet. You decide when to empty it in Finder.</span></p>
         </div>
       </div>
@@ -138,7 +138,7 @@ A lot more transparent.</h2>
           <h2 id="install-title" data-i18n="installTitle">Verify first.
 Then open.</h2>
           <p data-i18n="installBody">This release is ad-hoc signed, not Developer ID signed or notarized. macOS can block the disk image or the app. These steps keep every security protection on.</p>
-          <p class="install-links"><a href="https://github.com/vuluu2k/clean-mac/releases/download/v0.4.1/clean-mac-0.4.1-universal.dmg"><span>clean-mac-0.4.1-universal.dmg</span><span aria-hidden="true">↓</span></a><a href="https://github.com/vuluu2k/clean-mac/releases/download/v0.4.1/SHA256SUMS"><span>SHA256SUMS</span><span aria-hidden="true">↓</span></a></p>
+          <p class="install-links"><a href="https://github.com/vuluu2k/clean-mac/releases/download/v0.4.2/clean-mac-0.4.2-universal.dmg"><span>clean-mac-0.4.2-universal.dmg</span><span aria-hidden="true">↓</span></a><a href="https://github.com/vuluu2k/clean-mac/releases/download/v0.4.2/SHA256SUMS"><span>SHA256SUMS</span><span aria-hidden="true">↓</span></a></p>
         </div>
         <ol class="install-steps">
           <li><h3 data-i18n="install1Title">Download both files</h3><p data-i18n="install1Body">Save the DMG and SHA256SUMS from the release into the same folder.</p></li>

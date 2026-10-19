@@ -1,6 +1,6 @@
 # Install clean-mac / Cài đặt clean-mac
 
-[Download v0.4.1](https://github.com/vuluu2k/clean-mac/releases/tag/v0.4.1) · [Build from source](README.md#build-and-run) · [Tự build](README.vi.md#chạy-ngay)
+[Download v0.4.2](https://github.com/vuluu2k/clean-mac/releases/tag/v0.4.2) · [Build from source](README.md#build-and-run) · [Tự build](README.vi.md#chạy-ngay)
 
 ## English
 
@@ -9,7 +9,7 @@ Requires **macOS 14+**. The Universal app contains Apple silicon and Intel code.
 **This release is ad-hoc signed, not Developer ID signed or notarized.** macOS can block the downloaded disk image or app.
 Do not disable Gatekeeper or SIP. If you do not trust the release, build from source instead.
 
-1. Download `clean-mac-0.4.1-universal.dmg` and `SHA256SUMS` from the release page.
+1. Download `clean-mac-0.4.2-universal.dmg` and `SHA256SUMS` from the release page.
 2. In the download folder, verify the checksum:
 
    ```bash
@@ -35,7 +35,7 @@ Cần **macOS 14+**. App Universal chứa mã cho cả Apple silicon và Intel. 
 **Bản này ký ad-hoc, chưa ký Developer ID và chưa notarize.** macOS có thể chặn DMG hoặc app đã tải.
 Không tắt Gatekeeper hoặc SIP. Nếu chưa tin tưởng bản phát hành, hãy tự build từ mã nguồn.
 
-1. Tải `clean-mac-0.4.1-universal.dmg` và `SHA256SUMS` từ trang release.
+1. Tải `clean-mac-0.4.2-universal.dmg` và `SHA256SUMS` từ trang release.
 2. Trong thư mục chứa hai tệp, kiểm tra checksum:
 
    ```bash

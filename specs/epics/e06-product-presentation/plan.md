@@ -24,6 +24,10 @@ The owner selected update notices, not automatic installation. Add a manual chec
 5. Swift/localization/site/native fixture/browser gates; package a separate Universal 0.4.0 DMG without overwriting running bundles. Review all public files.
 6. Publish via checked feature PR, never direct-push main. Release verified DMG/checksum, deploy Pages and verify unauthenticated downloads + live browser behavior.
 
+## Owner change (2026-10-19)
+
+The owner approved a click-to-install updater after reviewing the trade-off: release assets are verified by SHA-256 from the same GitHub release, bundle ID, version and ad-hoc code signature, but not publisher identity; downloads made by the app carry no quarantine flag, so Gatekeeper does not reassess the new bundle. `/usr/bin/hdiutil` is the app's only runtime subprocess (read-only, no-browse attach and detach). The previous bundle is swapped atomically and moved to Trash.
+
 ## Limits
 
-No self-installing updater, privileged helper, telemetry, Gatekeeper/SIP bypass, real-data scan or cleanup. Distribution remains ad-hoc signed and not notarized. Native Trash/Put Back and Intel/macOS 14 hardware remain manual UAT.
+No silent or automatic installer, privileged helper, telemetry, Gatekeeper/SIP bypass, real-data scan or cleanup. Distribution remains ad-hoc signed and not notarized. Native Trash/Put Back and Intel/macOS 14 hardware remain manual UAT.

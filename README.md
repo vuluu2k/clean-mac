@@ -6,11 +6,11 @@
 
 A free, open-source macOS app built with SwiftUI. It explains cleanup suggestions and lets you decide what to remove.
 No server, accounts, telemetry, cloud AI or external dependencies.
-Optional update check (off by default) reads public release metadata from GitHub; no scan data is sent.
+Optional update check (off by default) reads public release metadata from GitHub; no scan data is sent. **Update now** downloads and installs a verified release only when you click.
 
 ## Download
 
-[Download Universal DMG — v0.4.1](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.1/clean-mac-0.4.1-universal.dmg) · [SHA256SUMS](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.1/SHA256SUMS)
+[Download Universal DMG — v0.4.2](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.2/clean-mac-0.4.2-universal.dmg) · [SHA256SUMS](https://github.com/vuluu2k/clean-mac/releases/download/v0.4.2/SHA256SUMS)
 
 The app includes Apple silicon and Intel code for macOS 14+. Intel hardware still needs manual verification.
 **This download is ad-hoc signed, not Developer ID signed or notarized. macOS can block it.**
@@ -46,7 +46,7 @@ Existing results, filters and file selections stay intact. No restart or new sca
 Language changes are disabled during an operation or an open review/confirmation.
 System permission dialogs, native errors and disk-size formatting can follow macOS language or region settings.
 
-## Features in 0.4.1
+## Features in 0.4.2
 
 - Real disk capacity, background scans, progress, cancellation and bounded live previews.
 - **Quick scan** for known cleanup locations and explicit **Deep volume scan** for accessible startup-volume metadata.
@@ -55,7 +55,8 @@ System permission dialogs, native errors and disk-size formatting can follow mac
 - Exact bundle-ID matching for suspected app leftovers, with ownership checks and protected data locks.
 - **Uninstall apps** with related-file review, separate confirmation and running-app protection.
 - No preselected files. Full-path confirmation, native Trash and individual failure reports.
-- Optional update notices: manual check or opt-in daily launch check against GitHub Releases. No automatic download or install.
+- Update notices: manual check or opt-in daily launch check against GitHub Releases.
+- **Update now** (app in /Applications or ~/Applications): downloads the release DMG, verifies SHA-256 against `SHA256SUMS`, bundle ID, version and code signature, swaps the app, moves the previous one to Trash and reopens. Nothing installs without a click. The app is ad-hoc signed, so the check proves integrity against the GitHub release, not publisher identity.
 
 ## Explainable rules, not garbage guarantees
 

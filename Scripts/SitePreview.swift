@@ -44,9 +44,9 @@ import SwiftUI
             _ = try file("Library/Preferences/com.example.studio.plist")
             _ = try file("Library/Sample/read-only.bin", bytes: 120_000_000)
             (mode.hasSuffix("-vi") ? AppLanguage.vietnamese : .english).save()
-            let updates = AppUpdates(checker: { _ in
+            let updates = AppUpdates(installTarget: URL(fileURLWithPath: "/Applications/clean-mac.app"), checker: { _ in
                 ReleaseUpdate(version: ReleaseVersion("0.5.0")!, url: URL(string: "https://github.com/vuluu2k/clean-mac/releases/tag/v0.5.0")!)
-            })
+            }, installer: { _, _ in preconditionFailure("Site preview must never install") })
             precondition(!updates.automaticallyChecks)
             model = AppModel(home: root.appendingPathComponent("Users/demo"), systemRoot: root, updates: updates,
                 diskSpaceReader: { _ in DiskSpace(total: 1_000_000_000_000, available: 640_000_000_000) },

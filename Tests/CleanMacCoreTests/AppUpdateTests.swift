@@ -95,3 +95,32 @@ private actor UpdateCalls {
     #expect(await calls.count == 1)
     #expect(model.state == .upToDate)
 }
+
+@MainActor @Test func installingAnUpdateRelaunchesOnlyAfterSuccess() async throws {
+    let name = "CleanMacUpdates.\(UUID())"
+    let defaults = try #require(UserDefaults(suiteName: name))
+    defer { defaults.removePersistentDomain(forName: name) }
+    let release = ReleaseUpdate(version: try #require(ReleaseVersion("0.5.0")), url: URL(string: "https://github.com/vuluu2k/clean-mac/releases/tag/v0.5.0")!)
+    let target = URL(fileURLWithPath: "/Applications/clean-mac.app")
+    var relaunched: [URL] = []
+    let model = AppUpdates(defaults: defaults, currentVersion: "0.4.0", installTarget: target, checker: { _ in release },
+                           installer: { _, url in url }, relaunch: { relaunched.append($0) })
+    await model.check()
+    await model.install(release)
+    #expect(relaunched == [target])
+    #expect(model.state == .installed(release))
+    await model.install(release)
+    #expect(relaunched == [target])
+
+    let failing = AppUpdates(defaults: defaults, currentVersion: "0.4.0", installTarget: target, checker: { _ in release },
+                             installer: { _, _ in throw UpdateInstallError.checksumMismatch }, relaunch: { relaunched.append($0) })
+    await failing.check()
+    await failing.install(release)
+    #expect(failing.state == .installFailed(release) && failing.release == release && relaunched.count == 1)
+
+    let elsewhere = AppUpdates(defaults: defaults, currentVersion: "0.4.0", installTarget: nil, checker: { _ in release },
+                               installer: { _, _ in Issue.record("No install outside Applications"); return target }, relaunch: { _ in })
+    await elsewhere.check()
+    await elsewhere.install(release)
+    #expect(elsewhere.state == .available(release))
+}

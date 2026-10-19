@@ -45,7 +45,7 @@ struct Dashboard: View {
                 .environment(\.locale, model.language.locale)
         }
         .sheet(isPresented: $model.showIssues) { issuesSheet.environment(\.locale, model.language.locale) }
-        .sheet(isPresented: $model.showUpdates) { AppUpdateView(updates: model.updates).environment(\.locale, model.language.locale) }
+        .sheet(isPresented: $model.showUpdates) { AppUpdateView(updates: model.updates, busy: model.busy).environment(\.locale, model.language.locale) }
         .sheet(item: $model.inspectedItem) { item in FindingDetailView(item: item).environment(\.locale, model.language.locale) }
         .sheet(item: $model.applicationPlan) { plan in ApplicationReviewView(model: model, plan: plan).environment(\.locale, model.language.locale) }
         .alert(L10n.text("Không thể thực hiện"), isPresented: Binding(
